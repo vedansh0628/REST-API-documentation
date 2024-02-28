@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Seat API
-  description: Manages seat reservations
+  description: Manages seat reservations by returning available seats, reserving seats, and deleting reservations
   version: 0.1.0
 servers:
   - url: http://theatre.com/seats
