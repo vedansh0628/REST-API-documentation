@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Seat API
+  description: Manages seat reservations
+  version: 0.1.0
+servers:
+  - url: http://theatre.com/seats
+    description: Seat request url
+paths:
+  /seats:
+    get:
+      summary: Returns a list of available seats
+      description: Returns all the seats in a theatre and will be marked available or unavailable
+      responses:
+        '200':    
+          description: A JSON array of seat objects
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: objects
+                  properties:
+                    seat_number:
+                      type: string
+                    reserved:
+                      type: boolean
+        '404':    
+          description: Failed to retrieve seats
+    post:
+      summary: Updates list of available seats
+      description: Marks the seats the user selected as reserved based on number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                type: objects
+                properties:
+                  seat_number:
+                    type: string
+                  reserved:
+                    type: boolean
+      responses:
+        '200':    
+          description: Seat reservation was updated
+        '404':    
+          description: Failed to reserve seats
+    delete:
+      summary: Deletes reservations
+      description: Unreserves seats that the user doesn't want
+      responses:
+        '200':    
+          description: Seat successfully unreserved
+        '404':    
+          description: Failed to unreserve seats
+        '500':    
+          description: Server encountered issues 
+                        
